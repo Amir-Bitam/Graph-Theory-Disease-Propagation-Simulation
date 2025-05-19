@@ -57,3 +57,56 @@ def ajouter_sommet(MA):
   # Ajouter une nouvelle ligne de n+1 zéros
   nouvelle_ligne = [0] * (n + 1)
   MA.append(nouvelle_ligne)
+
+
+
+
+# --------- Supprime le sommet i du graphe représenté par la matrice MA.
+# --------- Cela revient à supprimer la i-ème ligne et la i-ème colonne.
+    
+def supprimer_sommet(MA, i):
+  n = len(MA)  # Nombre de sommets
+
+  # Vérifier que le sommet existe (index valide)
+  if i < 0 or i >= n:
+    print(f"Erreur : sommet {i} hors limites (0 à {n-1})")
+    return
+
+  # Supprimer la i-ème ligne (connexions sortantes du sommet)
+  MA.pop(i)
+
+  # Supprimer la i-ème colonne (connexions entrantes vers le sommet)
+  for ligne in MA:
+    ligne.pop(i)
+
+
+
+# --------- Affiche une matrice d’adjacence avec les indices des sommets.
+
+def afficher_matrice(MA):
+
+  n = len(MA)  # nombre de sommets
+
+  print("\nMatrice d’adjacence :")
+
+  # Affichage de l'en-tête (indices des colonnes)
+  print("   ", end="")  # pour décaler la première ligne
+  for j in range(n):
+    print(f"{j:2}", end=" ")
+  print()  # retour à la ligne
+
+  # Affichage des lignes avec les indices
+  for i in range(n):
+    print(f"{i:2} ", end="")  # indice de la ligne
+    for j in range(n):
+      print(f"{MA[i][j]:2}", end=" ")
+    print()  # retour à la ligne après chaque ligne
+
+
+
+
+MA = creer_matrice(4)
+ajouter_arete(MA, 0, 1ment l)
+ajouter_arete(MA, 2, 3)
+
+afficher_matrice(MA)
