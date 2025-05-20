@@ -104,9 +104,36 @@ def afficher_matrice(MA):
 
 
 
+# Retourne l’ordre du graphe, c’est-à-dire le nombre de sommets.
 
-MA = creer_matrice(4)
-ajouter_arete(MA, 0, 1ment l)
-ajouter_arete(MA, 2, 3)
+def calculer_ordre(MA):
+  return len(MA)
+
+
+
+
+# Calcule le degré de chaque sommet dans le graphe non orienté.
+# Retourne une liste où chaque case i contient le degré du sommet i.
+    
+
+def degres_sommets(MA):
+    
+  n = len(MA)  # nombre de sommets
+  degres = []
+
+  for i in range(n):
+    # Somme des connexions de la ligne i = degré du sommet i
+    degre = sum(MA[i])
+    degres.append(degre)
+
+  return degres
+
+
+
+MA = creer_matrice(5)
+ajouter_sommet(MA)
+ajouter_sommet(MA)
 
 afficher_matrice(MA)
+ordre = calculer_ordre(MA)
+print(f"\n✅ Ordre du graphe : {ordre}")
