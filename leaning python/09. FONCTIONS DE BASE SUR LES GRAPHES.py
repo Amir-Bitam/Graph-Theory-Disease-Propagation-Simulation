@@ -137,3 +137,5 @@ ajouter_sommet(MA)
 afficher_matrice(MA)
 ordre = calculer_ordre(MA)
 print(f"\n✅ Ordre du graphe : {ordre}")
+
+
