@@ -84,7 +84,6 @@ def supprimer_sommet(MA, i):
 # --------- Affiche une matrice d’adjacence avec les indices des sommets.
 
 def afficher_matrice(MA):
-
   n = len(MA)  # nombre de sommets
 
   print("\nMatrice d’adjacence :")
@@ -117,7 +116,6 @@ def calculer_ordre(MA):
     
 
 def degres_sommets(MA):
-    
   n = len(MA)  # nombre de sommets
   degres = []
 
@@ -130,12 +128,73 @@ def degres_sommets(MA):
 
 
 
-MA = creer_matrice(5)
-ajouter_sommet(MA)
-ajouter_sommet(MA)
+# Affiche les voisins directs du sommet i (ceux qui sont connectés à i).
+    
+def voisinage(MA, i):
+  n = len(MA)
 
-afficher_matrice(MA)
-ordre = calculer_ordre(MA)
-print(f"\n✅ Ordre du graphe : {ordre}")
+  if i < 0 or i >= n:
+    print(f"Erreur : sommet {i} hors limites (0 à {n-1})")
+    return []
+
+  voisins = []
+  for j in range(n):
+    if MA[i][j] == 1:
+      voisins.append(j)
+
+  return voisins
+
+
+
+#     Trouve tous les chemins de longueur L entre les sommets i et j.
+#     Retourne une liste de chemins (chaque chemin est une liste de sommets).
+
+def chemins_longueur_L(MA, i, j, L):
+  n = len(MA)
+  
+  if i < 0 or j < 0 or i >= n or j >= n:
+    print("Erreur : sommet invalide.")
+    return []
+
+  resultats = []
+
+  def dfs(actuel, chemin, longueur_restante):
+    if longueur_restante == 0:
+      if actuel == j:
+        resultats.append(chemin[:])  # Copie du chemin trouvé
+      return
+
+    for voisin in range(n):
+      if MA[actuel][voisin] == 1 and voisin not in chemin:
+        chemin.append(voisin)
+        dfs(voisin, chemin, longueur_restante - 1)
+        chemin.pop()  # Revenir en arrière
+
+  dfs(i, [i], L)
+
+  if not resultats:
+    print(f"❌ Aucun chemin de longueur {L} entre {i} et {j}.")
+  else:
+    print(f"✅ {len(resultats)} chemin(s) trouvé(s) entre {i} et {j} de longueur {L}:")
+
+  for resultat in resultats:
+    print(" → ".join(map(str, resultat)))
+  
+
+
+MA = [
+    [0, 1, 0, 1],  # 0 → 1, 3
+    [1, 0, 1, 0],  # 1 → 0, 2
+    [0, 1, 0, 1],  # 2 → 1, 3
+    [1, 0, 1, 0]   # 3 → 0, 2
+]
+
+chemins_longueur_L(MA, 0, 2, 2)
+chemins_longueur_L(MA, 0, 0, 4)
+
+
+
+
+
 
 
