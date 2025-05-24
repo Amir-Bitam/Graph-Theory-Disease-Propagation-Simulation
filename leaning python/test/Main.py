@@ -20,7 +20,7 @@ from strategies import (optimiser_reseau_vaccination,
 G, patient_zero = creer_graphe_etats()
 
 # --- Simulation de propagation ---
-simuler_propagation(G)
+simuler_propagation(G, patient_zero)
 
 # --- Analyses ---
 # --- Fonction 12 — Déterminer combien d’interactions suffisent à propager le virus d’un individu à un autre ---

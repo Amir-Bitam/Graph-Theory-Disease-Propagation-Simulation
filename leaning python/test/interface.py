@@ -55,12 +55,13 @@ class InterfaceSimulation(tk.Tk):
         return True
 
     def generer_graphe(self):
-        self.G, self.patient_zero = creer_graphe_etats()
-        messagebox.showinfo("Succès", f"Graphe généré avec patient zéro : {self.patient_zero}")
+        self.G, self.patient_zero, self.nb = creer_graphe_etats()
+        messagebox.showinfo("Succès", f"Graphe généré avec {self.nb} personnes patient zéro : {self.patient_zero}")
 
     def lancer_propagation(self):
         if self.verifier_graphe():
-            simuler_propagation(self.G)
+            self.jour, self.texte_stats = simuler_propagation(self.G, self.patient_zero)
+            messagebox.showinfo("Succès", f"Simulation terminée en {self.jour} jour(s). Plus personne n’est infecté.\n{self.texte_stats}")
 
     def lancer_interactions_min(self):
         if self.verifier_graphe():
@@ -68,7 +69,11 @@ class InterfaceSimulation(tk.Tk):
             cible = source
             while cible == source:
                 cible = random.choice(list(self.G.nodes))
-            interactions_minimales(self.G, source, cible)
+            self.chemin, self.longueur = interactions_minimales(self.G, source, cible)
+            if self.chemin == None:
+                messagebox.showinfo("Succès", f"Aucun chemin entre {source} et {cible}")
+            else:    
+                messagebox.showinfo("Succès", f"Le virus mettra au **minimum {self.longueur} interaction(s)** pour atteindre {cible} epuis {source}.\nChemin suivi: {self.chemin}")
 
     def lancer_super_contaminateur(self):
         if self.verifier_graphe():

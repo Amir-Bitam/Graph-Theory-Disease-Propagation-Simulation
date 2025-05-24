@@ -20,4 +20,4 @@ def creer_graphe_etats(nb_personnes=None, p=None):
 
     print(f"🧬 Graphe généré avec {nb} personnes, p = {proba}")
     print(f"🦠 Patient zéro : {patient_zero}")
-    return G, patient_zero
+    return G, patient_zero, nb

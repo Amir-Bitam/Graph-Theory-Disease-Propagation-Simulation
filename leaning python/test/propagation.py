@@ -2,11 +2,19 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from utils import compter_etats, get_couleurs
 
-def simuler_propagation(G, prob_transmission=0.2, jours_maladie=5):
+def simuler_propagation(G, patient_zero, prob_transmission=0.2, jours_maladie=5):
     """
     Simule la propagation de l'infection jour par jour
     avec affichage graphique à chaque étape.
     """
+    for node in G.nodes:
+        if node != patient_zero:
+            G.nodes[node]['etat'] = 'sain'
+            G.nodes[node]['jours'] = 0
+
+    G.nodes[patient_zero]['etat'] = 'infecté'
+    G.nodes[patient_zero]['jours'] = 1
+    
     pos = nx.spring_layout(G, seed=42)
     jour = 1
 
@@ -65,3 +73,5 @@ def simuler_propagation(G, prob_transmission=0.2, jours_maladie=5):
             break
 
         jour += 1
+        
+    return jour, texte_stats

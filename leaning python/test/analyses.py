@@ -125,7 +125,7 @@ def detecter_groupes_isoles(G):
 def temps_minimal_infection(G, source, cible):
     chemin, longueur = interactions_minimales(G, source, cible)
     if chemin:
-        print(f"Temps minimal pour atteindre {cible} depuis {source} : {longueur * 5} jours")
+        print(f"Temps minimal pour atteindre {cible} depuis {source} : {longueur} jours")
         return longueur, chemin
     else:
         print(f"Aucun chemin entre {source} et {cible}")
