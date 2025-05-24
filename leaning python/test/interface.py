@@ -71,15 +71,16 @@ class InterfaceSimulation(tk.Tk):
                 cible = random.choice(list(self.G.nodes))
             self.chemin, self.longueur = interactions_minimales(self.G, source, cible)
             if self.chemin == None:
-                messagebox.showinfo("Succès", f"Aucun chemin entre {source} et {cible}")
+                messagebox.showinfo("Echec", f"Aucun chemin entre {source} et {cible}")
             else:    
-                messagebox.showinfo("Succès", f"Le virus mettra au **minimum {self.longueur} interaction(s)** pour atteindre {cible} epuis {source}.\nChemin suivi: {self.chemin}")
+                messagebox.showinfo("Succès", f"Le virus mettra au **minimum {self.longueur} interaction(s)** pour atteindre {cible} depuis {source}.\nChemin suivi: {self.chemin}")
 
     def lancer_super_contaminateur(self):
         if self.verifier_graphe():
             composante = max(nx.connected_components(self.G), key=len)
             G_connexe = self.G.subgraph(composante).copy()
-            super_contaminateur(G_connexe)
+            self.meilleur_sommet, self.max_visites ,self.meilleur_chemin  = super_contaminateur(G_connexe)
+            messagebox.showinfo("Succès", f"Le super contaminateur approximatif est le sommet {self.meilleur_sommet}.\nPeut atteindre {self.max_visites} personnes sans revenir")
 
     def lancer_groupes_isoles(self):
         if self.verifier_graphe():

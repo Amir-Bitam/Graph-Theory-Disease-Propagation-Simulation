@@ -103,7 +103,7 @@ def super_contaminateur(G):
     plt.tight_layout()
     plt.show()
 
-    return meilleur_sommet, meilleur_chemin
+    return meilleur_sommet, max_visites, meilleur_chemin
 
 
 # --- Fonction 15 — Détection des groupes isolés ---
