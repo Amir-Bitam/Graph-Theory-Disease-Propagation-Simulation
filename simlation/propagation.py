@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 from utils import compter_etats, get_couleurs
+import random
 
 def simuler_propagation(G, patient_zero, prob_transmission=0.2, jours_maladie=5):
     """
@@ -26,7 +27,6 @@ def simuler_propagation(G, patient_zero, prob_transmission=0.2, jours_maladie=5)
             if G.nodes[node]['etat'] == 'infecté':
                 for voisin in G.neighbors(node):
                     if G.nodes[voisin]['etat'] == 'sain':
-                        import random
                         if random.random() < prob_transmission:
                             nouveaux_infectes.append(voisin)
 
