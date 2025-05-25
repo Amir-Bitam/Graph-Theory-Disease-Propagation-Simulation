@@ -1,5 +1,5 @@
 
-# 🦠 Projet THG — Simulation de Propagation Virale
+# Projet THG | Analyse & Simulation de Réseaux de Contamination
 
 Ce projet a été réalisé dans le cadre du mini-projet de Théorie des Graphes (THG).  
 L’objectif est de modéliser et simuler la propagation d’une maladie infectieuse à travers un réseau social, représenté sous forme de graphe.
