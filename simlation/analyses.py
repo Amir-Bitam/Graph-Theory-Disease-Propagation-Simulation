@@ -47,48 +47,50 @@ def interactions_minimales(G, source, cible):
 # --- Fonction 13 — Super-contaminateur ---
 def super_contaminateur(G):
     """
-    Teste tous les sommets comme point de départ.
+    Teste tous les sommets comme point de départ avec plusieurs essais aléatoires.
     Retourne celui qui permet de visiter le plus de sommets sans revenir.
     Affiche aussi graphiquement le chemin.
     """
     meilleur_sommet = None
     meilleur_chemin = []
     max_visites = 0
+    nb_essais = 10  # Nombre de marches aléatoires par sommet
 
     for sommet in G.nodes():
-        visités = set()
-        chemin = [sommet]
-        actuel = sommet
-        visités.add(actuel)
+        for _ in range(nb_essais):
+            visités = set()
+            chemin = [sommet]
+            actuel = sommet
+            visités.add(actuel)
 
-        while True:
-            voisins = [v for v in G.neighbors(actuel) if v not in visités]
-            if not voisins:
-                break
-            suivant = random.choice(voisins)
-            chemin.append(suivant)
-            visités.add(suivant)
-            actuel = suivant
+            while True:
+                voisins = [v for v in G.neighbors(actuel) if v not in visités]
+                if not voisins:
+                    break
+                suivant = random.choice(voisins)
+                chemin.append(suivant)
+                visités.add(suivant)
+                actuel = suivant
 
-        if len(chemin) > max_visites:
-            max_visites = len(chemin)
-            meilleur_sommet = sommet
-            meilleur_chemin = chemin
+            if len(chemin) > max_visites:
+                max_visites = len(chemin)
+                meilleur_sommet = sommet
+                meilleur_chemin = chemin
 
     print(f"Le super contaminateur approximatif est le sommet {meilleur_sommet}")
     print(f"Peut atteindre {max_visites} personnes sans revenir")
     print(f"Chemin : {meilleur_chemin}")
     
-    # Visualisation du chemin du super contaminateur
+    # --- Visualisation ---
     pos = nx.spring_layout(G, seed=42)
-    
     fig = plt.figure(figsize=(10, 7))
+
     def on_key(event):
         if event.key == 'escape':
             plt.close(fig)
-            
-    fig.canvas.mpl_connect('key_press_event', on_key)        
-            
+
+    fig.canvas.mpl_connect('key_press_event', on_key)
+
     plt.title(f"Chemin du super contaminateur {meilleur_sommet}", fontsize=14)
     nx.draw(G, pos, with_labels=False, node_size=20, edge_color="lightgray")
     nx.draw_networkx_nodes(G, pos, nodelist=[meilleur_sommet], node_color="orange", node_size=100, label="Départ")
