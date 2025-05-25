@@ -4,9 +4,9 @@
 Ce projet a été réalisé dans le cadre du mini-projet de Théorie des Graphes (THG).  
 L’objectif est de modéliser et simuler la propagation d’une maladie infectieuse à travers un réseau social, représenté sous forme de graphe.
 
-## 🧪 Fonctionnalités principales
+## Fonctionnalités principales
 
-✅ **19 fonctions implémentées** couvrant :
+**19 fonctions implémentées** couvrant :
 - 🔧 Création et manipulation de graphes (matrice d’adjacence)
 - 🧬 Simulation jour par jour de l’infection
 - 📍 Analyse des points critiques : super-contaminateurs, interactions minimales, groupes isolés
@@ -14,7 +14,7 @@ L’objectif est de modéliser et simuler la propagation d’une maladie infecti
 - 💧 Calcul de flots de transmission (maximum flow)
 - 🖥️ Interface graphique avec `Tkinter` et visualisation avec `matplotlib`
 
-## 🗂️ Structure du projet
+## Structure du projet
 
 ```
 Projet-THG/
@@ -31,7 +31,7 @@ Projet-THG/
 ├── ANALYSE & SIMULATION AVANCÉE DE LA PROPAGATION.py  # Tests complets des fonctions 12 à 18
 ```
 
-## 🛠️ Technologies utilisées
+## Technologies utilisées
 
 - `Python 3`
 - `networkx` — manipulation de graphes
@@ -40,14 +40,14 @@ Projet-THG/
 - `random` — génération aléatoire de réseaux
 
 
-## 🚀 Lancer le projet
+## Lancer le projet
 
-### ▶️ Interface graphique
+### Interface graphique
 ```bash
 python simulation/interface.py
 ```
 
-### 🧪 Exécuter les tests
+### Exécuter les tests
 ```bash
 python simulation/Main.py
 ```
