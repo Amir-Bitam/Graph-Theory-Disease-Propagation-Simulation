@@ -7,12 +7,12 @@ L’objectif est de modéliser et simuler la propagation d’une maladie infecti
 ## Fonctionnalités principales
 
 **19 fonctions implémentées** couvrant :
-- 🔧 Création et manipulation de graphes (matrice d’adjacence)
-- 🧬 Simulation jour par jour de l’infection
-- 📍 Analyse des points critiques : super-contaminateurs, interactions minimales, groupes isolés
-- 💉 Optimisation des stratégies de vaccination (MST)
-- 💧 Calcul de flots de transmission (maximum flow)
-- 🖥️ Interface graphique avec `Tkinter` et visualisation avec `matplotlib`
+- Création et manipulation de graphes (matrice d’adjacence)
+- Simulation jour par jour de l’infection
+- Analyse des points critiques : super-contaminateurs, interactions minimales, groupes isolés
+- Optimisation des stratégies de vaccination (MST)
+- Calcul de flots de transmission (maximum flow)
+- Interface graphique avec `Tkinter` et visualisation avec `matplotlib`
 
 ## Structure du projet
 
