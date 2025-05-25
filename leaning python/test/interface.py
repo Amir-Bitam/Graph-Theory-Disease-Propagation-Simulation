@@ -84,7 +84,11 @@ class InterfaceSimulation(tk.Tk):
 
     def lancer_groupes_isoles(self):
         if self.verifier_graphe():
-            detecter_groupes_isoles(self.G)
+            self.composantes = detecter_groupes_isoles(self.G)
+            groupe = []
+            for i, comp in enumerate(self.composantes, 1):
+                groupe.append(f"\nGroupe {i} ({len(comp)} personnes)")
+            messagebox.showinfo("Succès", f"{len(self.composantes)} groupe(s) isolé(s) détecté(s).{groupe}")
 
     def lancer_temps_minimal(self):
         if self.verifier_graphe():

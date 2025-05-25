@@ -17,7 +17,7 @@ from strategies import (optimiser_reseau_vaccination,
 
 
 # --- Création du graphe et définition des états ---
-G, patient_zero = creer_graphe_etats()
+G, patient_zero, nb = creer_graphe_etats()
 
 # --- Simulation de propagation ---
 simuler_propagation(G, patient_zero)
