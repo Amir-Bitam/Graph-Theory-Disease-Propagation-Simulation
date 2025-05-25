@@ -58,7 +58,7 @@ def optimiser_reseau_vaccination(G):
     plt.show()  
 
     print(f"Distance totale parcourue : {round(distance_totale, 3)} km")
-    return mst
+    return mst, distance_totale
 
 
 # --- Fonction 17 — Simuler les flots de transmission. ---
@@ -123,7 +123,7 @@ def simuler_flot_transmission(G, source, cible):
         plt.tight_layout()
         plt.show()
 
-        return flot
+        return flot, chemins_disjoints
 
     except nx.NetworkXError:
         print(f"Aucun chemin entre {source} et {cible}")

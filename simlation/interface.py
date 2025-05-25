@@ -87,8 +87,8 @@ class InterfaceSimulation(tk.Tk):
             self.composantes = detecter_groupes_isoles(self.G)
             groupe = []
             for i, comp in enumerate(self.composantes, 1):
-                groupe.append(f"\nGroupe {i} ({len(comp)} personnes)")
-            messagebox.showinfo("Succès", f"{len(self.composantes)} groupe(s) isolé(s) détecté(s).{groupe}")
+                groupe.append(f"Groupe {i} ({len(comp)} personnes)")
+            messagebox.showinfo("Succès", f"{len(self.composantes)} groupe(s) isolé(s) détecté(s).\n" + "\n".join(groupe))
 
     def lancer_temps_minimal(self):
         if self.verifier_graphe():
@@ -96,11 +96,17 @@ class InterfaceSimulation(tk.Tk):
             cible = source
             while cible == source:
                 cible = random.choice(list(self.G.nodes))
-            temps_minimal_infection(self.G, source, cible)
+            self.longueur, self.chemin = temps_minimal_infection(self.G, source, cible)
+            if self.chemin == None:
+                messagebox.showinfo("Echec", f"Aucun chemin entre {source} et {cible}")
+            else:    
+                messagebox.showinfo("Succès", f"Temps minimal pour atteindre {cible} depuis {source} : {self.longueur} jours")
+            
 
     def lancer_optimisation(self):
         if self.verifier_graphe():
-            optimiser_reseau_vaccination(self.G)
+            self.mst, self.distance_totale = optimiser_reseau_vaccination(self.G)
+            messagebox.showinfo("Succès", f"Distance totale parcourue : {round(self.distance_totale, 3)} km")
 
     def lancer_flots(self):
         if self.verifier_graphe():
@@ -108,7 +114,19 @@ class InterfaceSimulation(tk.Tk):
             cible = source
             while cible == source:
                 cible = random.choice(list(self.G.nodes))
-            simuler_flot_transmission(self.G, source, cible)
+            
+            flot, chemins = simuler_flot_transmission(self.G, source, cible)
+
+            if flot == 0 or not chemins:
+                texte = f"Aucun chemin entre {source} et {cible}.\nFlot maximum : 0"
+            else:
+                texte = f"Flot maximum de {source} vers {cible} : {flot}\n"
+                texte += "Chemins disjoints utilisés pour transmettre le flot :\n"
+                for i, chemin in enumerate(chemins, 1):
+                    texte += f"  Chemin {i}: {' → '.join(map(str, chemin))}\n"
+
+            messagebox.showinfo("Résultat Flot", texte)
+
 
 
 if __name__ == "__main__":
