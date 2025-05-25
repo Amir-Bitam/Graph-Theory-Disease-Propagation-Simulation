@@ -52,7 +52,7 @@ python simulation/interface.py
 python simulation/Main.py
 ```
 
-### Colaborateurs:
+## Colaborateurs:
 - Amir-Bitam
 - rofaidaab
 
