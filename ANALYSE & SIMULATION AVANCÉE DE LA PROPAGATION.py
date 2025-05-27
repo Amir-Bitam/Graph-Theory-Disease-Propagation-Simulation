@@ -41,7 +41,7 @@ jours_maladie = 5
 pos = nx.spring_layout(G, seed=42)
 
 while True:
-    print(f"\n🦠 Jour {jour}")
+    print(f"\n Jour {jour}")
     nouveaux_infectés = []
 
     for node in G.nodes():
@@ -59,7 +59,7 @@ while True:
         G.nodes[node]['etat'] = 'infecté'
         G.nodes[node]['jours'] = 1
 
-    # 📊 Statistiques
+    #  Statistiques
     def compter_etats(G):
         etats = {"sain": 0, "infecté": 0, "guéri": 0}
         for node in G.nodes:
@@ -69,7 +69,7 @@ while True:
     stats = compter_etats(G)
     print("Statistiques :", stats)
 
-    # 🎨 Visualisation du graphe
+    #  Visualisation du graphe
     couleurs = []
     for node in G.nodes():
         etat = G.nodes[node]['etat']
@@ -97,7 +97,7 @@ while True:
     # plt.tight_layout()
     plt.subplots_adjust(top=0.93)
     
-    # 📉 Affichage des statistiques dans le coin inférieur droit
+    #  Affichage des statistiques dans le coin inférieur droit
     texte_stats = f"Sains : {stats['sain']}  |  Infectés : {stats['infecté']}  |  Guéris : {stats['guéri']}"
     plt.text(0.95, 0.02, texte_stats, ha='right', va='bottom', transform=plt.gcf().transFigure, fontsize=10, bbox=dict(facecolor='white', alpha=0.7, edgecolor='gray'))
 
@@ -105,7 +105,7 @@ while True:
     plt.show()
 
     if stats["infecté"] == 0:
-        print("\n✅ Simulation terminée. Plus personne n’est infecté.")
+        print("\n Simulation terminée. Plus personne n’est infecté.")
         break
 
     jour += 1
@@ -117,21 +117,21 @@ def interactions_minimales(G, source, cible):
     try:
         chemin = nx.shortest_path(G, source=source, target=cible)
         longueur = len(chemin) - 1
-        print(f"✅ Le virus mettra au **minimum {longueur} interaction(s)** pour atteindre le sommet {cible} depuis {source}.")
+        print(f" Le virus mettra au **minimum {longueur} interaction(s)** pour atteindre le sommet {cible} depuis {source}.")
         print(f"Chemin suivi: {chemin}")
         return chemin, longueur
     except nx.NetworkXNoPath:
-        print(f"❌ Aucun chemin entre {source} et {cible} → l’infection ne peut pas atteindre ce sommet.")
+        print(f" Aucun chemin entre {source} et {cible} → l’infection ne peut pas atteindre ce sommet.")
         return None, []
 
 # --- Test de la fonction 12 ---
-print("\n🕒 Test de la Fonction 12 — nombre minimal d’interactions :")
+print("\n Test de la Fonction 12 — nombre minimal d’interactions :")
 source = patient_zero
 cible = random.choice(list(G.nodes))
 while cible == source:
     cible = random.choice(list(G.nodes))
     
-print(f"\n📌 Calcul du nombre minimal d’interactions entre {source} (patient zéro) et {cible} :")
+print(f"\n Calcul du nombre minimal d’interactions entre {source} (patient zéro) et {cible} :")
 interactions_minimales(G, source, cible)
 
 
@@ -172,14 +172,14 @@ def contaminate_heuristique_max(G):
             meilleur_sommet = sommet
             meilleur_chemin = chemin
 
-    print(f"🏆 Le super contaminateur approximatif est le sommet {meilleur_sommet}")
+    print(f" Le super contaminateur approximatif est le sommet {meilleur_sommet}")
     print(f"🧪 Il peut atteindre {max_visites} personnes sans revenir.")
-    print(f"📍 Chemin : {meilleur_chemin}")
+    print(f" Chemin : {meilleur_chemin}")
 
 
-# 🔬 Test de la fonction 13 (super contaminateur)
-print("\n🕒 Test de la Fonction 13 — super contaminateur :")
-print("\n🧪 Recherche d’un super contaminateur:")
+#  Test de la fonction 13 (super contaminateur)
+print("\n Test de la Fonction 13 — super contaminateur :")
+print("\n Recherche d’un super contaminateur:")
 contaminate_heuristique_max(G_connexe)
 
 
@@ -191,7 +191,7 @@ def detecter_groupes_isolés(G):
     Chaque composante est un groupe isolé.
     """
     composantes = list(nx.connected_components(G))
-    print(f"🔍 {len(composantes)} groupe(s) isolé(s) détecté(s).")
+    print(f" {len(composantes)} groupe(s) isolé(s) détecté(s).")
 
     for i, comp in enumerate(composantes, 1):
         print(f"🧩 Groupe {i} ({len(comp)} personnes) : {sorted(comp)}")
@@ -199,8 +199,8 @@ def detecter_groupes_isolés(G):
     return composantes
 
 # --- Test de la fonction 15 ---
-print("\n🕒 Test de la Fonction 15 — Détection des groupes isolés :")
-print("\n🔬 Détection des groupes isolés :")
+print("\n Test de la Fonction 15 — Détection des groupes isolés :")
+print("\n Détection des groupes isolés :")
 detecter_groupes_isolés(G)
 
 
@@ -209,14 +209,14 @@ detecter_groupes_isolés(G)
 def temps_minimal_infection(G, source, cible):
     chemin, longueur = interactions_minimales(G, source, cible)
     if chemin:
-        print(f"🕒 Temps minimal pour atteindre {cible} depuis {source} : {longueur*5} jours ")
+        print(f" Temps minimal pour atteindre {cible} depuis {source} : {longueur*5} jours ")
         return longueur, chemin
     else:
-        print(f"❌ Aucun chemin entre {source} et {cible}")
+        print(f" Aucun chemin entre {source} et {cible}")
         return None, []
 
 # --- Test de la fonction 16 ---
-print("\n🕒 Test de la Fonction 16 — Temps minimal d'infection (via interactions_minimales) :")
+print("\n Test de la Fonction 16 — Temps minimal d'infection (via interactions_minimales) :")
 source = patient_zero
 cible = random.choice(list(G.nodes))
 while cible == source:
@@ -232,7 +232,7 @@ def optimiser_reseau_vaccination(G):
     Calcule et affiche l’arbre couvrant minimal (MST) basé sur les distances entre patients.
     Retourne aussi la distance totale parcourue.
     """
-    # 🔧 Générer une position fixe pour chaque nœud (x, y)
+    #  Générer une position fixe pour chaque nœud (x, y)
     pos = nx.spring_layout(G, seed=42)
 
     # 🧮 Ajouter la vraie distance comme poids
@@ -242,14 +242,14 @@ def optimiser_reseau_vaccination(G):
         distance = ((x1 - x2)**2 + (y1 - y2)**2) ** 0.5
         G[u][v]['weight'] = round(distance, 3)
 
-    # 📉 Calcul du MST
+    #  Calcul du MST
     mst = nx.minimum_spanning_tree(G, weight='weight')
 
-    # 🎨 Visualisation
+    #  Visualisation
     edge_labels = nx.get_edge_attributes(mst, 'weight')
 
     plt.figure(figsize=(10, 7))
-    plt.title("🧩 Réseau de vaccination optimal (MST)", fontsize=14)
+    plt.title(" Réseau de vaccination optimal (MST)", fontsize=14)
 
     # Graphe original (gris)
     nx.draw(G, pos, with_labels=False, node_size=20, edge_color="lightgray")
@@ -260,9 +260,9 @@ def optimiser_reseau_vaccination(G):
     # Affichage des poids
     nx.draw_networkx_edge_labels(mst, pos, edge_labels=edge_labels, font_size=8)
 
-    # 📊 Affichage des arêtes retenues + distance totale
+    #  Affichage des arêtes retenues + distance totale
     distance_totale = 0
-    print("\n🧮 Arêtes retenues dans le MST :")
+    print("\n Arêtes retenues dans le MST :")
     for u, v, d in mst.edges(data=True):
         print(f"{u} — {v}  (distance : {d['weight']} km)")
         distance_totale += d['weight']
@@ -273,12 +273,12 @@ def optimiser_reseau_vaccination(G):
     plt.tight_layout()
     plt.show()    
 
-    print(f"\n📏 Distance totale parcourue : {round(distance_totale, 3)} km")
+    print(f"\n Distance totale parcourue : {round(distance_totale, 3)} km")
 
     return mst
 
 # --- Test de la fonction 18 ---
-print("\n🧪 Fonction 18 — Optimisation du réseau de vaccination :")
+print("\n Fonction 18 — Optimisation du réseau de vaccination :")
 mst = optimiser_reseau_vaccination(G)
 
 
@@ -296,7 +296,7 @@ def simuler_flot_transmission(G, source, cible):
 
     try:
         flot, flow_dict = nx.maximum_flow(G_dirigé, source, cible)
-        print(f"\n🚰 Flot maximum de {source} vers {cible} : {flot}")
+        print(f"\n Flot maximum de {source} vers {cible} : {flot}")
 
         # --- Obtenir les arêtes où le flot est actif (> 0)
         edges_actives = [(u, v) for u, voisins in flow_dict.items() for v, f in voisins.items() if f > 0]
@@ -320,7 +320,7 @@ def simuler_flot_transmission(G, source, cible):
 
         dfs_chemins(source, [source])
 
-        print("\n📍 Chemins utilisés pour transmettre le flot :")
+        print("\n Chemins utilisés pour transmettre le flot :")
         if chemins_utilisés:
             for i, chemin in enumerate(chemins_utilisés, 1):
                 print(f"  Chemin {i}: {' → '.join(map(str, chemin))}")
@@ -330,7 +330,7 @@ def simuler_flot_transmission(G, source, cible):
         # --- Visualisation
         pos = nx.spring_layout(G, seed=42)
         plt.figure(figsize=(10, 7))
-        plt.title(f"💧 Flot de {source} vers {cible} — Maximum = {flot}", fontsize=14)
+        plt.title(f" Flot de {source} vers {cible} — Maximum = {flot}", fontsize=14)
 
         nx.draw(G, pos, with_labels=False, node_size=20, edge_color="lightgray")
         nx.draw_networkx_nodes(G, pos, nodelist=[source], node_color="orange", node_size=100)
@@ -348,12 +348,12 @@ def simuler_flot_transmission(G, source, cible):
         return flot
 
     except nx.NetworkXError:
-        print(f"❌ Aucun chemin entre {source} et {cible}")
+        print(f" Aucun chemin entre {source} et {cible}")
         return 0
 
 
 # --- Test de la fonction 17 ---
-print("\n🧪 Fonction 17 — Simulation de flots de transmission :")
+print("\n Fonction 17 — Simulation de flots de transmission :")
 source = patient_zero
 cible = random.choice(list(G.nodes))
 while cible == source:
