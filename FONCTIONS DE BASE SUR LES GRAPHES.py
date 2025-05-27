@@ -189,7 +189,7 @@ ajouter_sommet(MA)
 
 afficher_matrice(MA)
 ordre = calculer_ordre(MA)
-print(f"\n✅ Ordre du graphe : {ordre}")
+print(f"\n Ordre du graphe : {ordre}")
 
 
 
@@ -285,9 +285,9 @@ def chemins_longueur_L(MA, i, j, L):
   dfs(i, [i], L)
 
   if not resultats:
-    print(f"❌ Aucun chemin de longueur {L} entre {i} et {j}.")
+    print(f" Aucun chemin de longueur {L} entre {i} et {j}.")
   else:
-    print(f"✅ {len(resultats)} chemin(s) trouvé(s) entre {i} et {j} de longueur {L}:")
+    print(f" {len(resultats)} chemin(s) trouvé(s) entre {i} et {j} de longueur {L}:")
 
   for resultat in resultats:
     print(" → ".join(map(str, resultat)))
@@ -335,18 +335,18 @@ def tester_eulerien(MA):
         return False
 
   if not est_connexe(MA):
-    print("❌ Le graphe n’est pas connexe → pas de chemin ni cycle eulérien.")
+    print(" Le graphe n’est pas connexe → pas de chemin ni cycle eulérien.")
     return
 
   degres = degres_sommets(MA)
   impairs = [i for i in range(len(degres)) if degres[i] % 2 == 1]
 
   if len(impairs) == 0:
-    print("✅ Le graphe contient un **cycle eulérien** (tous les sommets ont un degré pair).")
+    print(" Le graphe contient un **cycle eulérien** (tous les sommets ont un degré pair).")
   elif len(impairs) == 2:
-    print(f"✅ Le graphe contient un **chemin eulérien** (exactement deux sommets ont un degré impair) : {impairs}.")
+    print(f" Le graphe contient un **chemin eulérien** (exactement deux sommets ont un degré impair) : {impairs}.")
   else:
-    print(f"❌ Le graphe n’a **ni chemin ni cycle eulérien** (sommets de degré impair : {len(impairs)}) : {impairs}.")
+    print(f" Le graphe n’a **ni chemin ni cycle eulérien** (sommets de degré impair : {len(impairs)}) : {impairs}.")
 
  
 # ----- TEST ----- 
